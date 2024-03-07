@@ -1,6 +1,5 @@
 class FollowRequestsController < ApplicationController
   before_action :set_follow_request, only: %i[ show edit update destroy ]
-  before_action :ensure_current_user_is_viewing_pending, only: [:show, :update, :edit]
 
   # GET /follow_requests or /follow_requests.json
   def index
@@ -69,9 +68,6 @@ class FollowRequestsController < ApplicationController
     def follow_request_params
       params.require(:follow_request).permit(:recipient_id, :sender_id, :status)
     end
-
-    def ensure_current_user_is_viewing_pending
-      if current_user != 
 
 
 end
