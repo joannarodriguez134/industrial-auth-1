@@ -24,6 +24,7 @@ class FollowRequestsController < ApplicationController
     @follow_request = FollowRequest.new(follow_request_params)
     @follow_request.sender = current_user
 
+    
     respond_to do |format|
       if @follow_request.save
         format.html { redirect_back fallback_location: root_url, notice: "Follow request was successfully created." }
@@ -67,4 +68,6 @@ class FollowRequestsController < ApplicationController
     def follow_request_params
       params.require(:follow_request).permit(:recipient_id, :sender_id, :status)
     end
+
+
 end
