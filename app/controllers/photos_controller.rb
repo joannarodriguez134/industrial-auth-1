@@ -3,26 +3,27 @@ class PhotosController < ApplicationController
   before_action :ensure_current_user_is_owner, only: [:destroy, :update, :edit]
   # GET /photos or /photos.json
   def index
-    @photos = Photo.all
+    @photos = authorize Photo.all
   end
-
+  # step 14 add authorize / authorize @photo to methods
   # GET /photos/1 or /photos/1.json
   def show
-    authorize @photo
+
   end
 
   # GET /photos/new
   def new
-    @photo = Photo.new
+    @photo = authorize Photo.new
   end
 
   # GET /photos/1/edit
   def edit
+
   end
 
   # POST /photos or /photos.json
   def create
-    @photo = Photo.new(photo_params)
+    @photo = authorize Photo.new(photo_params)
     @photo.owner = current_user
 
     respond_to do |format|
@@ -51,7 +52,7 @@ class PhotosController < ApplicationController
 
   # DELETE /photos/1 or /photos/1.json
   def destroy
-    @photo.destroy
+     @photo.destroy
     respond_to do |format|
       format.html { redirect_back fallback_location: root_url, notice: "Photo was successfully destroyed." }
       format.json { head :no_content }
@@ -60,9 +61,9 @@ class PhotosController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions
-
+    # step 15 anywhere i am calling set-photo i dont need authorize in that method
     def set_photo
-      @photo = Photo.find(params[:id])
+      @photo = authorize Photo.find(params[:id])
     end
 
     def ensure_current_user_is_owner

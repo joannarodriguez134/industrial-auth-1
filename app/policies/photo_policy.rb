@@ -7,8 +7,38 @@ class PhotoPolicy < ApplicationPolicy
 
   end
 
+  def index?
+    true
+  end
+
   def show?
     true
+  end
+
+  def create?
+    true
+  end
+
+  # step 11 here: to do add to notes
+  # both update and destroy call on author? to 
+  # check whether to allow that action based on if user is the owner of that account
+
+  def update?
+    author?
+  end
+
+  def destroy?
+    author?
+  end
+
+
+  private
+  def author?
+    record.owner == owner
+    # step 12:
+    # equivalent: photo.owner == owner
+    # owner because of belongs to relationship to user
+    # fk_rails_...  (owner_id => users.id)
   end
 
 

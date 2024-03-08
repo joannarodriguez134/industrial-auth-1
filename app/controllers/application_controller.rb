@@ -1,8 +1,14 @@
 class ApplicationController < ActionController::Base
-  include Pundit::Authorization
-  before_action :authenticate_user!
 
+  before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+
+  # step 13 : add after you create your policies to authorize in all controllers
+  
+  after_action :verify_authorized, unless: :devise_controller?
+  # after_action :verify_policy_scoped, only: :index, unless: :devise_controller?
+
+  include Pundit::Authorization
 
   
 
@@ -21,5 +27,5 @@ class ApplicationController < ActionController::Base
     flash[:alert] = "You are not authorized to perform this action."
     redirect_back(fallback_location: root_path)
   end
-  
+
 end
