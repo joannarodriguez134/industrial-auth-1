@@ -2,7 +2,9 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
   before_action :is_an_authorized_user, only: [:destroy, :create]
 
-  # make comments destroyable if you are not the currently signed in user
+  before_action :set_comment, only: %i[ show edit update destroy ]
+  before_action { authorize (@comment || Comment )}
+
 
   # GET /comments or /comments.json
   def index

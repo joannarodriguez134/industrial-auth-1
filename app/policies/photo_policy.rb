@@ -21,9 +21,9 @@ class PhotoPolicy < ApplicationPolicy
   #   of the owner, unless the owner is not private in which case anyone can
   #   see it
   def show?
-    user == photo.owner ||
-      !photo.owner.private? ||
-      photo.owner.followers.include?(user)
+    user == record.owner ||
+      !record.owner.private? ||
+      record.owner.followers.include?(user)
   end
 
   def create?
