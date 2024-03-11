@@ -52,7 +52,7 @@ class PhotoPolicy < ApplicationPolicy
 
   private
   def author?
-    photo.owner == user
+    record.owner == user
     # step 12:
     # equivalent: photo.user == owner
     # owner because of belongs to relationship to user
