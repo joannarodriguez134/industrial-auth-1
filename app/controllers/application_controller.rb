@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   # step 13 : add after you create your policies to authorize in all controllers
   
-  after_action :verify_authorized, unless: :devise_controller?
+  # after_action :verify_authorized, unless: :devise_controller?
   # after_action :verify_policy_scoped, only: :index, unless: :devise_controller?
 
   include Pundit::Authorization

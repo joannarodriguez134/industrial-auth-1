@@ -4,15 +4,26 @@ class PhotoPolicy < ApplicationPolicy
     # def resolve
     #   scope.all
     # end
+    attr_reader :user, :photo
 
-  end
+    def initialize(user, photo)
+      @user = user
+      @photo = photo
+    end
+
+  
 
   def index?
     true
   end
 
+  # Our policy is that a photo should only be seen by the owner or followers
+  #   of the owner, unless the owner is not private in which case anyone can
+  #   see it
   def show?
-    true
+    user == photo.owner ||
+      !photo.owner.private? ||
+      photo.owner.followers.include?(user)
   end
 
   def create?
@@ -41,5 +52,5 @@ class PhotoPolicy < ApplicationPolicy
     # fk_rails_...  (owner_id => users.id)
   end
 
-
+  end
 end
