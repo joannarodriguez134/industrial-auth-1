@@ -16,7 +16,7 @@ class PhotosController < ApplicationController
 
   # GET /photos/new
   def new
-    @photo = authorize Photo.new
+    @photo = Photo.new
   end
 
   # GET /photos/1/edit

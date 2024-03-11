@@ -10,7 +10,7 @@ class PhotoPolicy < ApplicationPolicy
       @user = user
       @photo = photo
     end
-
+  end
   
 
   def index?
@@ -59,5 +59,4 @@ class PhotoPolicy < ApplicationPolicy
     # fk_rails_...  (owner_id => users.id)
   end
 
-  end
 end
