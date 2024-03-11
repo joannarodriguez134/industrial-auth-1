@@ -30,9 +30,9 @@ class PhotoPolicy < ApplicationPolicy
     true
   end
 
-  def new?
-    create?
-  end
+  # def new?
+  #   create?
+  # end
 
 
 
