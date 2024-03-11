@@ -30,11 +30,6 @@ class PhotoPolicy < ApplicationPolicy
     true
   end
 
-  # def new?
-  #   create?
-  # end
-
-
 
 
   # step 11 here: to do add to notes

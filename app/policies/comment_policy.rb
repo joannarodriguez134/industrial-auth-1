@@ -11,7 +11,9 @@ class CommentPolicy < ApplicationPolicy
     end
   
     def show?
-      true
+      user == record.author ||
+      !record.author.private? ||
+      record.author.followers.include?(user)
     end
   
     def create?
