@@ -70,10 +70,11 @@ class FollowRequestsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def follow_request_params
       params.require(:follow_request).permit(:recipient_id, :sender_id, :status)
-      # to do add logic to user is authorize view follow requests and if it is current users
       end
 
-    end
+    
 
 
 end
+
+
