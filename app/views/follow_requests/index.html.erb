@@ -4,6 +4,7 @@
 <table>
   <thead>
     <tr>
+      <% if policy(follow_request).show? %>
       <th>Recipient</th>
       <th>Sender</th>
       <th>Status</th>
@@ -21,6 +22,7 @@
         <td><%= link_to 'Edit', edit_follow_request_path(follow_request) %></td>
         <td><%= link_to 'Destroy', follow_request, data: { turbo_method: :delete }, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
