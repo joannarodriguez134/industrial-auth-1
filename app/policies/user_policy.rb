@@ -11,11 +11,11 @@ class UserPolicy < ApplicationPolicy
     end
 
     def feed?
-      true
+      user == current_user
     end
 
     def discover?
-      true
+      user == current_user
     end
 
     def followers?
