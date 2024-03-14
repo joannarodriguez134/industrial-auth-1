@@ -13,7 +13,7 @@
 
   <%= form.hidden_field :recipient_id %>
 
-  <% if current_user != @user%>
+  <% if policy(follow_request).show? %>
     <div class="actions">
       <%= form.submit "Follow", class: "btn btn-outline-secondary btn-block" %>
     </div>

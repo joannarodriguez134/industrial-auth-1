@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
 
   # step 13 : add after you create your policies to authorize in all controllers
   
-  #  after_action :verify_authorized, unless: :devise_controller?
-  # after_action :verify_policy_scoped, only: :index, unless: :devise_controller?
+   after_action :verify_authorized, unless: :devise_controller?
+  after_action :verify_policy_scoped, only: :index, unless: :devise_controller?
 
   include Pundit::Authorization
 
@@ -19,13 +19,13 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:username, :private, :name, :bio, :website, :avatar_image])
   end
 
-  #  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  # private
+  private
 
-  # def user_not_authorized
-  #   flash[:alert] = "You are not authorized to perform this action."
-  #   redirect_back(fallback_location: root_path)
-  # end
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_back(fallback_location: root_path)
+  end
 
 end

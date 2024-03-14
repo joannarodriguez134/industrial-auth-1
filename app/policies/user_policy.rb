@@ -11,28 +11,32 @@ class UserPolicy < ApplicationPolicy
     end
 
     def feed?
-      user == current_user
+      current_user_view?
     end
 
     def discover?
-      user == current_user
+      current_user_view?
     end
 
     def followers?
-      user == current_user || !user.private? ||
-      user.followers.include?(current_user)
+      visible?
     end
 
     def following?
+      visible?
+    end
+
+    def liked?
+      visible?
+    end
+  
+    def visible?
       user == current_user || !user.private? ||
       user.followers.include?(current_user)
     end
 
+    def current_user_view?
+      user == current_user
+    end
 
-
-    # def visible?
-    #   user == user || !user.private?  ||
-    #   user.followers.include?(user)
-    # end 
-  
 end

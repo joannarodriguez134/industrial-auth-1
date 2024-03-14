@@ -1,9 +1,9 @@
 class CommentPolicy < ApplicationPolicy
-  class Scope < Scope
-    # NOTE: Be explicit about which records you allow access to!
-    # def resolve
-    #   scope.all
-    # end
+  attr_reader :user, :comment
+
+  def initialize(user, comment)
+    @user = user
+    @comment = comment
   end
 
     def index?
@@ -11,9 +11,7 @@ class CommentPolicy < ApplicationPolicy
     end
   
     def show?
-      user == record.author ||
-      !record.author.private? ||
-      record.author.followers.include?(user)
+      user == comment.author
     end
   
     def create?
@@ -32,7 +30,7 @@ class CommentPolicy < ApplicationPolicy
 
     private
     def author?
-      record.author == user
+      comment.author == user
     end
   
   
